@@ -1,3 +1,8 @@
+coordfilename = "Python/coords.txt"
+
+# yes, I just run which run is true
+run = 1
+
 def xmaslight():
     # This is the code from my 
     
@@ -22,7 +27,6 @@ def xmaslight():
     
     # IMPORT THE COORDINATES (please don't break this bit)
     
-    coordfilename = "Python/coords.txt"
 	
     fin = open(coordfilename,'r')
     coords_raw = fin.readlines()
@@ -87,8 +91,6 @@ def xmaslight():
     # the starting point on the vertical axis
     c = 100 
     
-    # yes, I just run which run is true
-    run = 1
     while run == 1:
         
         time.sleep(slow)
@@ -141,4 +143,5 @@ def xmaslight():
 
 
 # yes, I just put this at the bottom so it auto runs
-xmaslight()
+if __name__ == "__main__":
+    xmaslight()
