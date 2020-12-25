@@ -17,13 +17,16 @@ duration_seconds = 10
 def stop_after_duration():
     import time
     time.sleep(duration_seconds)
-    xmaslights.run=0
+    neopixel.finished = True
 
 if __name__ == "__main__":
     stop_thread = threading.Thread(target=stop_after_duration)
     #Create the LED objects before starting the timer
     pixels = neopixel.NeoPixel()
+    neopixel.finished = False
     stop_thread.start()
-    xmaslights.run=1
-    xmaslights.xmaslight()
+    try:
+        xmaslights.xmaslight()
+    except neopixel.FinishedException:
+        pass
     stop_thread.join()

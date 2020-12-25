@@ -1,6 +1,15 @@
 import os
 import bpy
 
+finished = True
+
+class FinishedException(Exception):
+    pass
+
+def raise_if_finished():
+    if finished:
+        raise FinishedException()
+
 coords_file_path = os.path.join(os.path.dirname(bpy.data.filepath),"coords.txt")
 
 def load_coordinates():
@@ -45,6 +54,7 @@ class NeoPixel:
             create_objects(coords)
 
     def __setitem__(self, index, value):
+       raise_if_finished()
        g,r,b = value
        set_color(index,r/255, g/255, b/255, 1)
        if self.auto_write:
@@ -63,15 +73,16 @@ def test_module():
     import random
     import time
     pixels = NeoPixel()
-    for tick in range(100):
+    for tick in range(20):
         for i in range(500):
             hue = random.randint(1,6)
             r = hue & 0b100 and 255 or 0
             g = hue & 0b010 and 255 or 0
             b = hue & 0b001 and 255 or 0
             pixels[i] = [g,r,b]
-        # Redraw the window
         time.sleep(0.1)
+    finished = True
 
 if __name__ == "__main__":
+    finished = False
     test_module()
