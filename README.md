@@ -7,7 +7,6 @@ To run the simulation, open the .blend file in Blender, go to the Scripting work
 This project was organized so as to make as few changes as possible to the original file. However, a few small changes were needed:
 
 - The xmaslight() function was moved into an if statement so it does not run immediately when the module is imported (it will still run if the module is executed directly).
-- The run flag was moved outside the function so we can stop it from outside, otherwise it would run forever until we force-quit Blender.
 - The path to the LED coordinates file was moved outside the function to allow us to inject the path relative to the Blender file, otherwise the script would not be able to find it when running from Blender.
 
 These changes should not change the behavior of the script when running outside of Blender. However, note that the neopixel and board files must be removed before the script can be run on the actual tree.
